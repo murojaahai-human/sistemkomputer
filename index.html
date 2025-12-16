@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Komputer: Brainware, Hardware, Software</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <div class="logo">💻 Sistem Komputer</div>
+      <ul class="nav-links">
+        <li><a href="#intro">Pendahuluan</a></li>
+        <li><a href="#pilar">Tiga Pilar</a></li>
+        <li><a href="#cpu">CPU</a></li>
+        <li><a href="#devices">Perangkat</a></li>
+        <li><a href="#software">Software</a></li>
+        <li><a href="#ekosistem">Ekosistem</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle">🌙 Mode</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>🖥️ Sistem Komputer</h1>
+      <p>
+        Memahami Brainware, Hardware, dan Software sebagai tiga pilar utama
+        sistem komputer beserta komponen pendukungnya.
+      </p>
+      <a href="#intro" class="cta-button">Mulai Belajar</a>
+    </div>
+
+    <!-- Contoh area gambar hero (ganti src dengan gambar Anda) -->
+    <div class="hero-image">
+      <img src="img/sistem-komputer-hero.png" alt="Ilustrasi sistem komputer" />
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container main-container">
+
+    <!-- PENGANTAR -->
+    <section id="intro" class="reveal">
+      <h2>📚 Pengantar Sistem Komputer</h2>
+      <p>
+        Sistem komputer adalah gabungan terintegrasi dari
+        <span class="tooltip">hardware
+          <span class="tooltiptext">
+            Perangkat fisik komputer yang dapat dilihat dan disentuh
+          </span>
+        </span>,
+        <span class="tooltip">software
+          <span class="tooltiptext">
+            Program dan instruksi yang mengatur kerja hardware
+          </span>
+        </span>,
+        dan
+        <span class="tooltip">brainware
+          <span class="tooltiptext">
+            Manusia yang mengoperasikan, mengendalikan, dan mengembangkan sistem
+          </span>
+        </span>.
+      </p>
+      <p>
+        Ketiga komponen ini saling bergantung: hardware menjadi media fisik,
+        software berperan sebagai pengatur dan penerjemah instruksi, sementara
+        brainware menjadi pengendali utama yang menentukan tujuan dan cara
+        pemanfaatan teknologi komputer.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">👨‍💻</span>
+          <h4>Brainware</h4>
+          <p>
+            Manusia sebagai pengguna, perencana, pengembang, dan pemelihara
+            sistem komputer.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔧</span>
+          <h4>Hardware</h4>
+          <p>
+            Perangkat fisik seperti CPU, RAM, perangkat input/output, dan
+            media penyimpanan.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">💾</span>
+          <h4>Software</h4>
+          <p>
+            Sistem operasi, aplikasi, dan utilitas yang menginstruksikan
+            hardware untuk bekerja.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIGA PILAR -->
+    <section id="pilar" class="reveal">
+      <h2>🏛️ Tiga Pilar Sistem Komputer</h2>
+      <p>
+        Berikut adalah tiga komponen utama yang Anda temukan pada hampir
+        semua pembahasan sistem komputer : brainware, hardware,
+        dan software.
+      </p>
+
+      <div class="tabs">
+        <button class="tab-button active" data-tab="brainwareTab">👨‍💻 Brainware</button>
+        <button class="tab-button" data-tab="hardwareTab">🔧 Hardware</button>
+        <button class="tab-button" data-tab="softwareTab">💾 Software</button>
+      </div>
+
+      <!-- Brainware Tab -->
+      <div id="brainwareTab" class="tab-content active">
+        <h3>Brainware: Manusia dalam Sistem Komputer</h3>
+        <p>
+          Brainware adalah semua orang yang terlibat dalam pemanfaatan
+          sistem komputer, mulai dari pengguna biasa hingga perancang
+          dan pemelihara sistem. Dijelaskan bahwa tanpa
+          brainware, hardware dan software tidak akan memberikan manfaat.
+        </p>
+
+        <div class="cards-grid">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="big-emoji">👨‍💼</span>
+                <h4>Operator</h4>
+                <p>Mengoperasikan aplikasi sehari-hari.</p>
+              </div>
+              <div class="flip-card-back">
+                <h4>Operator</h4>
+                <p>
+                  Menjalankan program/aplikasi untuk mengolah data, membuat
+                  dokumen, mengakses informasi, dan melakukan pekerjaan rutin.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="big-emoji">👨‍💻</span>
+                <h4>Programmer</h4>
+                <p>Membuat dan mengembangkan software.</p>
+              </div>
+              <div class="flip-card-back">
+                <h4>Programmer / Developer</h4>
+                <p>
+                  Merancang logika, menulis kode, dan menguji software sesuai
+                  kebutuhan pengguna atau organisasi.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="big-emoji">🛠️</span>
+                <h4>Teknisi</h4>
+                <p>Memelihara dan memperbaiki sistem.</p>
+              </div>
+              <div class="flip-card-back">
+                <h4>Teknisi / Administrator</h4>
+                <p>
+                  Memastikan perangkat keras dan jaringan berjalan dengan baik,
+                  melakukan perbaikan dan perawatan berkala.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hardware Tab -->
+      <div id="hardwareTab" class="tab-content">
+        <h3>Hardware: Perangkat Fisik Komputer</h3>
+        <p>
+          Hardware mencakup semua bagian fisik komputer :
+          CPU, motherboard, RAM, media penyimpanan, serta perangkat input dan
+          output.
+        </p>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>🧠 CPU (Central Processing Unit)</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p>
+                  CPU adalah otak komputer yang bertanggung jawab memproses
+                  instruksi dan data. Bagian CPU terdiri
+                  dari Control Unit, ALU, dan register.
+                </p>
+                <!-- Tempat gambar CPU -->
+                <img src="img/cpu.png" alt="Gambar CPU" class="content-image" />
+                <button class="small-button" data-modal="cpuModal">
+                  Lihat Detail CPU
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>🎛️ Motherboard</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p>
+                  Motherboard adalah papan sirkuit utama yang menghubungkan
+                  CPU, memori, penyimpanan, dan perangkat lainnya sehingga
+                  dapat saling berkomunikasi.
+                </p>
+                <img src="img/motherboard.png" alt="Gambar motherboard" class="content-image" />
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>🧩 RAM (Random Access Memory)</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p>
+                  RAM adalah memori utama yang bersifat sementara (volatile).
+                  Menyimpan data dan instruksi yang sedang diproses CPU.
+                  Ketika komputer dimatikan, isi RAM akan hilang.
+                </p>
+                <img src="img/ram.png" alt="Gambar RAM" class="content-image" />
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>💽 Media Penyimpanan</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p>
+                  Media penyimpanan digunakan untuk menyimpan data dan program
+                  secara jangka panjang. Terbagi menjadi 2 media penyimpanan:
+                  primary storage dan secondary storage.
+                </p>
+                <ul class="content-list">
+                  <li>Primary: RAM, ROM</li>
+                  <li>Secondary: HDD, SSD, USB flash drive, dll.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Software Tab -->
+      <div id="softwareTab" class="tab-content">
+        <h3>Software: Program dan Aplikasinya</h3>
+        <p>
+          Software adalah kumpulan program dan instruksi yang mengendalikan
+          kerja hardware. Software dibagi menjadi sistem operasi,
+          software aplikasi, dan software utilitas.
+        </p>
+
+        <div class="cards-grid">
+          <div class="card">
+            <span class="card-icon">🖥️</span>
+            <h4>Sistem Operasi</h4>
+            <p>
+              Mengelola sumber daya hardware dan menyediakan antarmuka bagi
+              pengguna: Windows, Linux, macOS, Android, iOS.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-icon">📱</span>
+            <h4>Software Aplikasi</h4>
+            <p>
+              Digunakan untuk tugas tertentu: pengolah kata, pengolah angka,
+              desain grafis, browser, aplikasi komunikasi, dan lain-lain.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-icon">🛡️</span>
+            <h4>Software Utilitas</h4>
+            <p>
+              Membantu pemeliharaan dan keamanan sistem, seperti antivirus,
+              program backup, dan pembersih file.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CPU & KOMPONEN UTAMA -->
+    <section id="cpu" class="reveal">
+      <h2>🧠 CPU dan Komponen Utama</h2>
+      <p>
+        CPU dijelaskan sebagai pusat pemrosesan yang
+        memiliki tiga bagian utama: Control Unit, ALU, dan Register.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">⚙️</span>
+          <h4>Control Unit (CU)</h4>
+          <p>
+            Mengatur alur instruksi dan mengontrol kerja bagian lain di dalam
+            komputer dengan cara mengirimkan sinyal kendali.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">➗</span>
+          <h4>Arithmetic Logic Unit (ALU)</h4>
+          <p>
+            Melakukan operasi aritmatika (penjumlahan, pengurangan, dsb.)
+            dan logika (AND, OR, NOT, dan perbandingan).
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📥</span>
+          <h4>Register</h4>
+          <p>
+            Tempat penyimpanan kecil berkecepatan tinggi di dalam CPU yang
+            menampung data/instruksi sementara saat pemrosesan berlangsung.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERANGKAT INPUT/OUTPUT & STORAGE  -->
+    <section id="devices" class="reveal">
+      <h2>⌨️🖨️ Perangkat Input, Output, dan Penyimpanan</h2>
+
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">⌨️</span>
+          <h4>Perangkat Input</h4>
+          <p>
+            Digunakan untuk memasukkan data dan perintah ke dalam komputer.
+          </p>
+          <ul class="content-list">
+            <li>Keyboard</li>
+            <li>Mouse</li>
+            <li>Scanner</li>
+            <li>Webcam</li>
+            <li>Microphone</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🖥️</span>
+          <h4>Perangkat Output</h4>
+          <p>
+            Menampilkan hasil pemrosesan komputer kepada pengguna.
+          </p>
+          <ul class="content-list">
+            <li>Monitor</li>
+            <li>Printer</li>
+            <li>Speaker</li>
+            <li>Projector</li>
+            <li>Headphone</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">💾</span>
+          <h4>Penyimpanan Data</h4>
+          <p>Tempat menyimpan data dan program.</p>
+          <ul class="content-list">
+            <li>Primary Storage: RAM, ROM</li>
+            <li>Secondary Storage: HDD, SSD, USB flash drive</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOFTWARE (bab khusus) -->
+    <section id="software" class="reveal">
+      <h2>💽 Software: Program dan Aplikasinya</h2>
+      <p>
+        Bagian ini mengulang dan menegaskan bab software , dengan
+        pembagian jenis software dan contoh-contohnya.
+      </p>
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">⚙️</span>
+          <h4>Sistem Operasi</h4>
+          <p>
+            Mengelola sumber daya sistem dan menjadi perantara antara pengguna
+            dengan hardware.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📊</span>
+          <h4>Software Aplikasi</h4>
+          <p>
+            Mendukung pekerjaan spesifik, misalnya pengolah kata, pengolah
+            angka, desain grafis, dan lain-lain.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🧹</span>
+          <h4>Utilitas</h4>
+          <p>
+            Menjaga kinerja dan keamanan: antivirus, disk cleaner, program
+            backup, dan sebagainya.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIAGRAM EKOSISTEM -->
+    <section id="ekosistem" class="reveal">
+      <h2>🔄 Hubungan dan Ekosistem Sistem Komputer</h2>
+      <p>
+        “Brainware, hardware, dan software bekerja bersama membentuk ekosistem, 
+        seperti yang digambarkan dalam diagram berikut yang menunjukkan alur interaksinya.”
+      </p>
+
+      <div class="diagram-container">
+        <svg class="diagram-svg" viewBox="0 0 600 300">
+          <!-- Brainware -->
+          <rect class="diagram-element" id="brainNode"
+                x="50" y="100" rx="20" ry="20"
+                width="140" height="80"
+                fill="#6366f1" />
+          <text x="120" y="145" text-anchor="middle" fill="#fff" font-size="16">
+            Brainware
+          </text>
+          <text x="120" y="165" text-anchor="middle" fill="#e5e7eb" font-size="12">
+            Manusia
+          </text>
+
+          <!-- Software -->
+          <rect class="diagram-element" id="softNode"
+                x="230" y="40" rx="20" ry="20"
+                width="140" height="80"
+                fill="#8b5cf6" />
+          <text x="300" y="75" text-anchor="middle" fill="#fff" font-size="16">
+            Software
+          </text>
+          <text x="300" y="95" text-anchor="middle" fill="#e5e7eb" font-size="12">
+            Program
+          </text>
+
+          <!-- Hardware -->
+          <rect class="diagram-element" id="hardNode"
+                x="230" y="180" rx="20" ry="20"
+                width="140" height="80"
+                fill="#ec4899" />
+          <text x="300" y="215" text-anchor="middle" fill="#fff" font-size="16">
+            Hardware
+          </text>
+          <text x="300" y="235" text-anchor="middle" fill="#ffe4e6" font-size="12">
+            Perangkat Fisik
+          </text>
+
+          <!-- Output -->
+          <rect class="diagram-element" id="outNode"
+                x="430" y="100" rx="20" ry="20"
+                width="140" height="80"
+                fill="#22c55e" />
+          <text x="500" y="135" text-anchor="middle" fill="#fff" font-size="16">
+            Output
+          </text>
+          <text x="500" y="155" text-anchor="middle" fill="#dcfce7" font-size="12">
+            Informasi
+          </text>
+
+          <!-- Arrows -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10"
+                    refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L6,3 z" fill="#e5e7eb" />
+            </marker>
+          </defs>
+
+          <line x1="190" y1="140" x2="230" y2="100"
+                stroke="#e5e7eb" stroke-width="2"
+                marker-end="url(#arrow)" />
+          <line x1="300" y1="120" x2="300" y2="180"
+                stroke="#e5e7eb" stroke-width="2"
+                marker-end="url(#arrow)" />
+          <line x1="370" y1="140" x2="430" y2="140"
+                stroke="#e5e7eb" stroke-width="2"
+                marker-end="url(#arrow)" />
+          <line x1="430" y1="180" x2="370" y2="210"
+                stroke="#e5e7eb" stroke-width="2"
+                marker-end="url(#arrow)" />
+        </svg>
+        <p class="diagram-hint">
+          Klik setiap kotak pada diagram untuk melihat ringkasan perannya.
+        </p>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="reveal">
+      <h2>📝 Quiz Sistem Komputer</h2>
+      <p>
+        Jawab pertanyaan berikut untuk menguji pemahaman Anda terhadap
+        materi Sistem Komputer.
+      </p>
+
+      <div class="quiz-container" id="quizContainer">
+        <!-- Soal akan di-generate lewat JavaScript -->
+      </div>
+    </section>
+
+    <!-- KESIMPULAN -->
+    <section id="kesimpulan" class="reveal">
+      <h2>✅ Kesimpulan</h2>
+      <p>
+        Dapat disimpulkan bahwa sistem komputer terdiri dari
+        brainware, hardware, dan software yang saling terhubung. Brainware
+        menentukan tujuan dan cara pemanfaatan teknologi, hardware
+        menyediakan sarana fisik, sedangkan software mengatur dan
+        menerjemahkan instruksi.
+      </p>
+      <p>
+        Pemahaman tentang masing-masing komponen (termasuk CPU, perangkat
+        input/output, dan media penyimpanan) sangat penting agar komputer
+        dapat dimanfaatkan secara optimal dalam belajar, bekerja, dan
+        kehidupan sehari-hari.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- MODAL DETAIL CPU -->
+  <div id="cpuModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Detail CPU </h3>
+      <p>
+        CPU (Central Processing Unit) merupakan pusat pemrosesan data yang
+        memiliki tiga bagian utama:
+      </p>
+      <ul class="content-list">
+        <li>
+          <strong>Control Unit (CU)</strong> – mengatur alur instruksi dan
+          koordinasi kerja seluruh komponen.
+        </li>
+        <li>
+          <strong>Arithmetic Logic Unit (ALU)</strong> – melakukan operasi
+          matematika dan logika.
+        </li>
+        <li>
+          <strong>Register</strong> – menyimpan data dan instruksi sementara
+          dengan akses sangat cepat.
+        </li>
+      </ul>
+      <p>
+        CPU bekerja sangat cepat dalam satuan siklus mesin untuk mengeksekusi
+        instruksi yang disediakan oleh software.
+      </p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
