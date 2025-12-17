@@ -271,3 +271,56 @@ function checkQuiz() {
 }
 
 renderQuiz();
+// ==================== FOOTER SCRIPTS ====================
+
+// Auto update tahun copyright
+const yearSpan = document.querySelector('.footer-bottom p');
+if (yearSpan) {
+  const currentYear = new Date().getFullYear();
+  yearSpan.innerHTML = yearSpan.innerHTML.replace('2025', currentYear);
+}
+
+// Reveal animasi untuk footer
+const footer = document.querySelector('.footer');
+if (footer) {
+  const footerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          footerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  // Set initial state
+  footer.style.opacity = '0';
+  footer.style.transform = 'translateY(30px)';
+  footer.style.transition = 'all 0.8s ease';
+
+  footerObserver.observe(footer);
+}
+
+// Typing effect untuk "Created by" (opsional)
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.textContent = '';
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+// Uncomment jika ingin efek typing:
+// const createdByLink = document.querySelector('.created-by a');
+// if (createdByLink) {
+//   const originalText = createdByLink.textContent;
+//   typeWriter(createdByLink, originalText, 150);
+// }
