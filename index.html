@@ -1,623 +1,2307 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistem Komputer: Brainware, Hardware, Software</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Komputer - Belajar Interaktif 🚀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-light: #ffffff;
+            --bg-dark: #0f172a;
+            --text-light: #1e293b;
+            --text-dark: #f1f5f9;
+            --card-light: #f8fafc;
+            --card-dark: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: inherit;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 999;
+            transition: width 0.3s ease;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 100px 2rem 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { top: 40%; left: 20%; animation-delay: 2s; }
+        .floating-icon:nth-child(4) { top: 70%; left: 70%; animation-delay: 1.5s; }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .card {
+            background: var(--card-dark);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            border: none;
+            background: var(--card-light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        body.dark-mode .tab {
+            background: var(--card-dark);
+            color: var(--text-dark);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .flip-card-back {
+            background: var(--card-light);
+            transform: rotateY(180deg);
+        }
+
+        body.dark-mode .flip-card-back {
+            background: var(--card-dark);
+        }
+
+        .icon-large {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem;
+        }
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .flowchart-item {
+            background: var(--card-light);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        body.dark-mode .flowchart-item {
+            background: var(--card-dark);
+        }
+
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .game-container {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        body.dark-mode .game-container {
+            background: var(--card-dark);
+        }
+
+        .drag-drop-game {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .draggable-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .draggable-item {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            cursor: move;
+            text-align: center;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .draggable-item:hover {
+            transform: scale(1.05);
+        }
+
+        .draggable-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .drop-zone {
+            padding: 1.5rem;
+            background: var(--card-light);
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .drop-zone {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .drop-zone.drag-over {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--accent);
+        }
+
+        .drop-zone.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success);
+        }
+
+        .drop-zone.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--danger);
+        }
+
+        .drop-zone-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .quiz-container {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 700px;
+            width: 100%;
+            margin: 2rem auto;
+        }
+
+        body.dark-mode .quiz-container {
+            background: var(--card-dark);
+        }
+
+        .quiz-progress {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--danger);
+        }
+
+        .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .quiz-result h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .memory-card-front, .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-radius: 10px;
+        }
+
+        .memory-card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .memory-card-back {
+            background: white;
+            transform: rotateY(180deg);
+        }
+
+        body.dark-mode .memory-card-back {
+            background: var(--card-dark);
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--card-light);
+            border-radius: 10px;
+        }
+
+        body.dark-mode .game-stats {
+            background: var(--card-dark);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .pc-builder {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .component-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .component-group {
+            background: var(--card-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        body.dark-mode .component-group {
+            background: var(--card-dark);
+        }
+
+        .component-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .component-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 2px solid var(--primary);
+            background: var(--bg-light);
+            color: var(--text-light);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        body.dark-mode .component-select {
+            background: var(--card-dark);
+            color: var(--text-dark);
+        }
+
+        .component-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .pc-preview {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 15px;
+            position: sticky;
+            top: 100px;
+        }
+
+        body.dark-mode .pc-preview {
+            background: var(--card-dark);
+        }
+
+        .price-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .spec-list li {
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .troubleshooting-cases {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .case-card {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        body.dark-mode .case-card {
+            background: var(--card-dark);
+        }
+
+        .case-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .case-description {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+        }
+
+        .case-solutions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .solution-option {
+            padding: 1rem;
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .solution-option {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .solution-option:hover {
+            border-color: var(--primary);
+        }
+
+        .solution-option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .solution-option.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .glossary {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .glossary-item {
+            background: var(--card-light);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .glossary-item {
+            background: var(--card-dark);
+        }
+
+        .glossary-item:hover {
+            transform: translateX(10px);
+        }
+
+        .glossary-term {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .glossary-definition {
+            display: none;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .glossary-item.active .glossary-definition {
+            display: block;
+        }
+
+        .glossary-item.active .glossary-term::after {
+            content: ' ▼';
+        }
+
+        .glossary-term::after {
+            content: ' ▶';
+            font-size: 0.8rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: slideInDown 0.5s ease;
+        }
+
+        body.dark-mode .modal-content {
+            background: var(--card-dark);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: inherit;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                background: var(--bg-light);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            body.dark-mode .navbar-menu {
+                background: var(--bg-dark);
+            }
+
+            .navbar-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .drag-drop-game {
+                grid-template-columns: 1fr;
+            }
+
+            .pc-builder {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-game {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .section {
+                padding: 80px 1rem 30px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">💻 Sistem Komputer</div>
+        <div class="navbar-menu" id="navbarMenu">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#pengenalan" class="nav-link">Materi</a>
+            <a href="#komponen" class="nav-link">Komponen</a>
+            <a href="#hardware" class="nav-link">Hardware</a>
+            <a href="#games" class="nav-link">Game</a>
+            <a href="#glossary" class="nav-link">Glossary</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Mode</button>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 
-  <!-- Progress Bar -->
-  <div id="progress-bar"></div>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="container nav-container">
-      <div class="logo">💻 Sistem Komputer</div>
-      <ul class="nav-links">
-        <li><a href="#intro">Pendahuluan</a></li>
-        <li><a href="#pilar">Tiga Pilar</a></li>
-        <li><a href="#cpu">CPU</a></li>
-        <li><a href="#devices">Perangkat</a></li>
-        <li><a href="#software">Software</a></li>
-        <li><a href="#ekosistem">Ekosistem</a></li>
-        <li><a href="#quiz">Quiz</a></li>
-        <li>
-          <button class="theme-toggle" id="themeToggle">🌙 Mode</button>
-        </li>
-      </ul>
+    <!-- Hero Section -->
+    <section class="hero-section section" id="home">
+        <div class="floating-icons">
+            <div class="floating-icon">💻</div>
+            <div class="floating-icon">🖥️</div>
+            <div class="floating-icon">⌨️</div>
+            <div class="floating-icon">🖱️</div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Sistem Komputer 🚀</h1>
+            <p class="hero-subtitle">Belajar Interaktif dengan Game & Simulasi</p>
+            <div class="cta-buttons">
+                <a href="#pengenalan" class="btn btn-primary">Mulai Belajar</a>
+                <a href="#games" class="btn btn-secondary">Main Game</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pengenalan -->
+    <section class="section" id="pengenalan">
+        <div class="container">
+            <h2 class="section-title">📚 Apa Itu Sistem Komputer?</h2>
+            
+            <div class="video-container">
+                <div class="video-placeholder">
+                     Pengenalan Sistem Komputer
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>💡 Analogi Sederhana:</strong> Bayangkan komputer seperti tubuh manusia. Ada otak (CPU), memori (RAM), panca indera (input devices), dan cara berkomunikasi (output devices). Semua bekerja bersama untuk menjalankan tugas!</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎯 Definisi</h3>
+                    <p>Sistem komputer adalah kombinasi dari <strong>hardware</strong> (perangkat keras), <strong>software</strong> (perangkat lunak), dan <strong>brainware</strong> (pengguna) yang bekerja sama untuk memproses data menjadi informasi.</p>
+                </div>
+                <div class="card">
+                    <h3>⚙️ Fungsi Utama</h3>
+                    <p>Sistem komputer melakukan 3 proses utama:</p>
+                    <ul>
+                        <li><strong>Input</strong> - Menerima data</li>
+                        <li><strong>Process</strong> - Mengolah data</li>
+                        <li><strong>Output</strong> - Menghasilkan informasi</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🌟 Kenapa Penting?</h3>
+                    <p>Di era digital, sistem komputer ada di mana-mana! Dari smartphone yang kamu pakai, laptop untuk belajar, sampai sistem di bank dan rumah sakit. Memahami sistem komputer = memahami teknologi modern!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 Komponen -->
+    <section class="section" id="komponen">
+        <div class="container">
+            <h2 class="section-title">🔧 3 Komponen Utama Sistem Komputer</h2>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab(0)">🖥️ Hardware</button>
+                <button class="tab" onclick="switchTab(1)">💿 Software</button>
+                <button class="tab" onclick="switchTab(2)">👨‍💻 Brainware</button>
+            </div>
+
+            <div class="tab-content active" id="tab-0">
+                <div class="card">
+                    <h3>🖥️ Hardware (Perangkat Keras)</h3>
+                    <p>Hardware adalah semua komponen fisik komputer yang bisa kamu lihat dan sentuh.</p>
+                    <div class="info-box">
+                        <p><strong>Contoh Hardware:</strong></p>
+                        <ul>
+                            <li>🔹 <strong>CPU (Central Processing Unit)</strong> - Otak komputer yang memproses data</li>
+                            <li>🔹 <strong>RAM (Random Access Memory)</strong> - Memori sementara untuk aplikasi yang sedang berjalan</li>
+                            <li>🔹 <strong>Motherboard</strong> - Papan sirkuit utama yang menghubungkan semua komponen</li>
+                            <li>🔹 <strong>Hard Disk/SSD</strong> - Penyimpanan data permanen</li>
+                            <li>🔹 <strong>Monitor</strong> - Layar untuk menampilkan output</li>
+                            <li>🔹 <strong>Keyboard & Mouse</strong> - Perangkat input</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-1">
+                <div class="card">
+                    <h3>💿 Software (Perangkat Lunak)</h3>
+                    <p>Software adalah program atau instruksi yang memberitahu hardware apa yang harus dilakukan.</p>
+                    <div class="info-box">
+                        <p><strong>Jenis-jenis Software:</strong></p>
+                        <ul>
+                            <li>🔸 <strong>Sistem Operasi</strong> - Windows, macOS, Linux, Android (mengelola hardware)</li>
+                            <li>🔸 <strong>Aplikasi</strong> - Microsoft Office, Chrome, Photoshop (untuk tugas spesifik)</li>
+                            <li>🔸 <strong>Utility</strong> - Antivirus, Disk Cleaner (maintenance sistem)</li>
+                            <li>🔸 <strong>Programming</strong> - Visual Studio, Python (untuk membuat software)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-2">
+                <div class="card">
+                    <h3>👨‍💻 Brainware (Pengguna)</h3>
+                    <p>Brainware adalah manusia yang mengoperasikan dan menggunakan sistem komputer.</p>
+                    <div class="info-box">
+                        <p><strong>Peran Brainware:</strong></p>
+                        <ul>
+                            <li>👤 <strong>End User</strong> - Pengguna biasa (kamu dan saya!)</li>
+                            <li>👨‍💼 <strong>Operator</strong> - Mengoperasikan sistem tertentu</li>
+                            <li>👨‍💻 <strong>Programmer</strong> - Membuat dan mengembangkan software</li>
+                            <li>🔧 <strong>System Administrator</strong> - Mengelola dan memelihara sistem</li>
+                            <li>🎨 <strong>Designer</strong> - Merancang tampilan dan pengalaman pengguna</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 Unit Hardware -->
+    <section class="section" id="hardware">
+        <div class="container">
+            <h2 class="section-title">🔌 5 Unit Hardware dalam Sistem Komputer</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Hover/sentuh kartu untuk melihat detail!</p>
+            
+            <div class="cards-grid">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="icon-large">🧠</div>
+                            <h3>Unit Pemrosesan</h3>
+                            <p>Processing Unit</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Unit Pemrosesan</h3>
+                            <p><strong>Fungsi:</strong> Memproses dan mengolah data</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul style="text-align: left;">
+                                <li>CPU (Central Processing Unit)</li>
+                                <li>GPU (Graphics Processing Unit)</li>
+                                <li>ALU (Arithmetic Logic Unit)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="icon-large">⌨️</div>
+                            <h3>Unit Input</h3>
+                            <p>Input Devices</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Unit Input</h3>
+                            <p><strong>Fungsi:</strong> Memasukkan data ke komputer</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul style="text-align: left;">
+                                <li>Keyboard - input teks</li>
+                                <li>Mouse - input pointer</li>
+                                <li>Scanner - input gambar</li>
+                                <li>Microphone - input suara</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="icon-large">🖥️</div>
+                            <h3>Unit Output</h3>
+                            <p>Output Devices</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Unit Output</h3>
+                            <p><strong>Fungsi:</strong> Menampilkan hasil pemrosesan</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul style="text-align: left;">
+                                <li>Monitor - menampilkan visual</li>
+                                <li>Printer - mencetak dokumen</li>
+                                <li>Speaker - output suara</li>
+                                <li>Proyektor - tampilan layar besar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="icon-large">💾</div>
+                            <h3>Unit Penyimpanan</h3>
+                            <p>Storage Devices</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Unit Penyimpanan</h3>
+                            <p><strong>Fungsi:</strong> Menyimpan data dan program</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul style="text-align: left;">
+                                <li>HDD (Hard Disk Drive)</li>
+                                <li>SSD (Solid State Drive)</li>
+                                <li>RAM (memori sementara)</li>
+                                <li>Flash Drive / USB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="icon-large">🌐</div>
+                            <h3>Unit Jaringan</h3>
+                            <p>Network Devices</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Unit Jaringan</h3>
+                            <p><strong>Fungsi:</strong> Menghubungkan komputer dengan jaringan</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul style="text-align: left;">
+                                <li>NIC (Network Interface Card)</li>
+                                <li>Modem - koneksi internet</li>
+                                <li>Router - pembagi jaringan</li>
+                                <li>WiFi Adapter</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Flowchart -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🔄 Bagaimana Komputer Bekerja?</h2>
+            
+            <div class="flowchart">
+                <div class="flowchart-item">
+                    <h3>📥 INPUT</h3>
+                    <p>Pengguna memasukkan data melalui perangkat input (keyboard, mouse, dll)</p>
+                    <div class="badge">Contoh: Mengetik teks, klik mouse</div>
+                </div>
+                
+                <div class="flowchart-arrow">⬇️</div>
+                
+                <div class="flowchart-item">
+                    <h3>⚙️ PROCESS</h3>
+                    <p>CPU memproses data sesuai instruksi program dengan bantuan RAM</p>
+                    <div class="badge">Contoh: Menghitung, mengolah gambar</div>
+                </div>
+                
+                <div class="flowchart-arrow">⬇️</div>
+                
+                <div class="flowchart-item">
+                    <h3>📤 OUTPUT</h3>
+                    <p>Hasil ditampilkan melalui perangkat output (monitor, printer, speaker)</p>
+                    <div class="badge">Contoh: Tampilan layar, cetakan, suara</div>
+                </div>
+                
+                <div class="flowchart-arrow">⬇️</div>
+                
+                <div class="flowchart-item">
+                    <h3>💾 STORAGE (Opsional)</h3>
+                    <p>Data disimpan ke storage untuk digunakan kemudian</p>
+                    <div class="badge">Contoh: Save file, database</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Games Hub -->
+    <section class="section" id="games">
+        <div class="container">
+            <h2 class="section-title">🎮 Game Hub - Uji Pemahamanmu!</h2>
+            
+            <!-- Game 1: Drag & Drop -->
+            <div class="game-container">
+                <h3 style="text-align: center; margin-bottom: 1rem;">🎯 Game 1: Cocokkan Komponen Hardware</h3>
+                <p style="text-align: center; margin-bottom: 2rem;">Drag komponen ke kategori yang sesuai!</p>
+                
+                <div class="score-display">Score: <span id="dragDropScore">0</span> / 13</div>
+                
+                <div class="drag-drop-game">
+                    <div class="draggable-items" id="draggableItems">
+                        <div class="draggable-item" draggable="true" data-category="pemrosesan">CPU</div>
+                        <div class="draggable-item" draggable="true" data-category="pemrosesan">GPU</div>
+                        <div class="draggable-item" draggable="true" data-category="output">Monitor</div>
+                        <div class="draggable-item" draggable="true" data-category="output">Printer</div>
+                        <div class="draggable-item" draggable="true" data-category="output">Speaker</div>
+                        <div class="draggable-item" draggable="true" data-category="input">Keyboard</div>
+                        <div class="draggable-item" draggable="true" data-category="input">Mouse</div>
+                        <div class="draggable-item" draggable="true" data-category="input">Scanner</div>
+                        <div class="draggable-item" draggable="true" data-category="penyimpanan">RAM</div>
+                        <div class="draggable-item" draggable="true" data-category="penyimpanan">SSD</div>
+                        <div class="draggable-item" draggable="true" data-category="penyimpanan">HDD</div>
+                        <div class="draggable-item" draggable="true" data-category="jaringan">Router</div>
+                        <div class="draggable-item" draggable="true" data-category="jaringan">NIC</div>
+                    </div>
+                    
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="pemrosesan">
+                            <div class="drop-zone-title">🧠 Unit Pemrosesan</div>
+                        </div>
+                        <div class="drop-zone" data-category="input">
+                            <div class="drop-zone-title">⌨️ Unit Input</div>
+                        </div>
+                        <div class="drop-zone" data-category="output">
+                            <div class="drop-zone-title">🖥️ Unit Output</div>
+                        </div>
+                        <div class="drop-zone" data-category="penyimpanan">
+                            <div class="drop-zone-title">💾 Unit Penyimpanan</div>
+                        </div>
+                        <div class="drop-zone" data-category="jaringan">
+                            <div class="drop-zone-title">🌐 Unit Jaringan</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-danger" onclick="resetDragDrop()">🔄 Reset Game</button>
+                </div>
+            </div>
+            <!-- Game 2: Quiz Interaktif -->
+            <div class="game-container" style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 1rem;">📝 Game 2: Quiz Interaktif</h3>
+                <p style="text-align: center; margin-bottom: 2rem;">Jawab 10 pertanyaan tentang sistem komputer!</p>
+                
+                <div class="quiz-container" id="quizContainer">
+                    <div class="quiz-progress" id="quizProgress">Soal 1 dari 10</div>
+                    <div class="quiz-question" id="quizQuestion"></div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div class="quiz-navigation">
+                        <button class="btn btn-secondary" onclick="prevQuestion()" id="prevBtn">⬅️ Sebelumnya</button>
+                        <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Selanjutnya ➡️</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-result" id="quizResult" style="display: none;">
+                    <h3>🎉 Quiz Selesai!</h3>
+                    <div class="score-display" id="finalQuizScore"></div>
+                    <p id="quizMessage"></p>
+                    <button class="btn btn-success" onclick="resetQuiz()">🔄 Ulangi Quiz</button>
+                </div>
+            </div>
+
+            <!-- Game 3: Memory Card Game -->
+            <div class="game-container" style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 1rem;">🃏 Game 3: Memory Card Game</h3>
+                <p style="text-align: center; margin-bottom: 2rem;">Temukan pasangan kartu yang sama!</p>
+                
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="moveCount">0</div>
+                        <div>Moves</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="matchCount">0</div>
+                        <div>Matches</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="timeCount">0</div>
+                        <div>Time (s)</div>
+                    </div>
+                </div>
+                
+                <div class="memory-game" id="memoryGame"></div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-danger" onclick="resetMemoryGame()">🔄 Reset Game</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section PC Builder -->
+    <section class="section" id="pc-builder">
+        <div class="container">
+            <h2 class="section-title">🖥️ PC Builder Simulator</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Rakit PC impianmu dan hitung budgetnya!</p>
+            
+            <div class="pc-builder">
+                <div class="component-selector">
+                    <div class="component-group">
+                        <label>🧠 Processor (CPU)</label>
+                        <select class="component-select" id="cpuSelect" onchange="updatePCBuild()">
+                            <option value="0">-- Pilih CPU --</option>
+                            <option value="1500000">Intel Core i3-10100 - Rp 1.500.000</option>
+                            <option value="2500000">Intel Core i5-11400 - Rp 2.500.000</option>
+                            <option value="4000000">Intel Core i7-11700 - Rp 4.000.000</option>
+                            <option value="6000000">Intel Core i9-11900K - Rp 6.000.000</option>
+                            <option value="2000000">AMD Ryzen 5 5600X - Rp 2.000.000</option>
+                        </select>
+                    </div>
+
+                    <div class="component-group">
+                        <label>💾 Memory (RAM)</label>
+                        <select class="component-select" id="ramSelect" onchange="updatePCBuild()">
+                            <option value="0">-- Pilih RAM --</option>
+                            <option value="500000">8GB DDR4 2666MHz - Rp 500.000</option>
+                            <option value="800000">16GB DDR4 3200MHz - Rp 800.000</option>
+                            <option value="1500000">32GB DDR4 3600MHz - Rp 1.500.000</option>
+                            <option value="2500000">64GB DDR4 3600MHz - Rp 2.500.000</option>
+                        </select>
+                    </div>
+
+                    <div class="component-group">
+                        <label>💽 Storage</label>
+                        <select class="component-select" id="storageSelect" onchange="updatePCBuild()">
+                            <option value="0">-- Pilih Storage --</option>
+                            <option value="400000">256GB SSD SATA - Rp 400.000</option>
+                            <option value="700000">512GB SSD NVMe - Rp 700.000</option>
+                            <option value="1300000">1TB SSD NVMe - Rp 1.300.000</option>
+                            <option value="2500000">2TB SSD NVMe - Rp 2.500.000</option>
+                        </select>
+                    </div>
+
+                    <div class="component-group">
+                        <label>🎮 Graphics Card (GPU)</label>
+                        <select class="component-select" id="gpuSelect" onchange="updatePCBuild()">
+                            <option value="0">-- Pilih GPU --</option>
+                            <option value="2500000">NVIDIA GTX 1650 - Rp 2.500.000</option>
+                            <option value="4500000">NVIDIA RTX 3060 - Rp 4.500.000</option>
+                            <option value="7000000">NVIDIA RTX 3070 - Rp 7.000.000</option>
+                            <option value="12000000">NVIDIA RTX 4080 - Rp 12.000.000</option>
+                        </select>
+                    </div>
+
+                    <div class="component-group">
+                        <label>🔌 Motherboard</label>
+                        <select class="component-select" id="moboSelect" onchange="updatePCBuild()">
+                            <option value="0">-- Pilih Motherboard --</option>
+                            <option value="800000">H410M Basic - Rp 800.000</option>
+                            <option value="1500000">B560M Mid-Range - Rp 1.500.000</option>
+                            <option value="3000000">Z590 High-End - Rp 3.000.000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pc-preview">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">📋 Spesifikasi PC Kamu</h3>
+                    <ul class="spec-list" id="specList">
+                        <li>CPU: <span id="selectedCPU">-</span></li>
+                        <li>RAM: <span id="selectedRAM">-</span></li>
+                        <li>Storage: <span id="selectedStorage">-</span></li>
+                        <li>GPU: <span id="selectedGPU">-</span></li>
+                        <li>Motherboard: <span id="selectedMobo">-</span></li>
+                    </ul>
+                    <hr style="margin: 1.5rem 0; border-color: var(--primary);">
+                    <div class="price-display">
+                        Total: Rp <span id="totalPrice">0</span>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-success" onclick="buildPC()">✅ Build PC</button>
+                        <button class="btn btn-danger" onclick="resetPCBuilder()">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Troubleshooting -->
+    <section class="section" id="troubleshooting">
+        <div class="container">
+            <h2 class="section-title">🔧 Troubleshooting Challenge</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Bantu pecahkan masalah komputer! Pilih solusi yang tepat.</p>
+            
+            <div class="troubleshooting-cases">
+                <!-- Case 1 -->
+                <div class="case-card">
+                    <div class="case-title">⚠️ Kasus 1: Komputer Tidak Mau Menyala</div>
+                    <div class="case-description">
+                        Saat tombol power ditekan, komputer sama sekali tidak menunjukkan tanda-tanda kehidupan. Tidak ada bunyi, tidak ada lampu indikator, dan kipas tidak berputar. Berdasarkan skenario di atas, jika Anda adalah seorang teknisi komputer, langkah diagnostik manakah yang paling efektif dan logis untuk dilakukan pertama kali guna mengidentifikasi sumber masalah yang paling mendasar? 
+                    </div>
+                    <div class="case-solutions">
+                        <div class="solution-option" onclick="checkSolution(0, 0)">
+                            A. Memeriksa koneksi kabel power ke stopkontak dan PSU (Power Supply Unit)
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(0, 1)">
+                            B. Melakukan instalasi ulang sistem operasi secara menyeluruh
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(0, 2)">
+                            C. Membersihkan debu pada pada power dan casing komputer
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(0, 3)">
+                            D. Update driver graphics card
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback-0"></div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="case-card">
+                    <div class="case-title">⚠️ Kasus 2: Komputer Sangat Lambat</div>
+                    <div class="case-description">
+                        Komputer berjalan sangat lambat, loading aplikasi memakan waktu lama, dan sering freeze. Task Manager menunjukkan RAM usage 95%.
+                    </div>
+                    <div class="case-solutions">
+                        <div class="solution-option" onclick="checkSolution(1, 0)">
+                            A. Ganti motherboard dengan yang baru
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(1, 1)">
+                            B. Tambah kapasitas RAM atau tutup aplikasi yang tidak dipakai
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(1, 2)">
+                            C. Tambah kapasitas GPU
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(1, 3)">
+                            D. Install lebih banyak aplikasi untuk membuat cepat komputer
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback-1"></div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="case-card">
+                    <div class="case-title">⚠️ Kasus 3: Tidak Ada Tampilan di Monitor</div>
+                    <div class="case-description">
+                        Komputer menyala (terdengar bunyi dan kipas berputar), tapi monitor tetap hitam/blank. Lampu indikator monitor menyala.
+                    </div>
+                    <div class="case-solutions">
+                        <div class="solution-option" onclick="checkSolution(2, 0)">
+                            A. Cek koneksi kabel VGA/HDMI antara monitor dan PC
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(2, 1)">
+                            B. Ganti mouse dengan yang wireless
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(2, 2)">
+                            C. Install antivirus baru
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(2, 3)">
+                            D. Hapus semua file di komputer
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback-2"></div>
+                </div>
+
+                <!-- Case 4 -->
+                <div class="case-card">
+                    <div class="case-title">⚠️ Kasus 4: Keyboard Tidak Berfungsi</div>
+                    <div class="case-description">
+                        Saat mengetik, tidak ada respon dari keyboard. Mouse masih berfungsi normal. Keyboard sudah dicoba di port USB lain, tetap tidak berfungsi.
+                    </div>
+                    <div class="case-solutions">
+                        <div class="solution-option" onclick="checkSolution(3, 0)">
+                            A. Format hard disk
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(3, 1)">
+                            B. Coba keyboard lain atau cek driver keyboard di Device Manager
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(3, 2)">
+                            C. Matikan internet
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(3, 3)">
+                            D. Ganti processor
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback-3"></div>
+                </div>
+
+                <!-- Case 5 -->
+                <div class="case-card">
+                    <div class="case-title">⚠️ Kasus 5: Komputer Restart Sendiri</div>
+                    <div class="case-description">
+                        Komputer tiba-tiba restart sendiri saat sedang digunakan, terutama ketika menjalankan aplikasi berat. Kadang muncul blue screen.
+                    </div>
+                    <div class="case-solutions">
+                        <div class="solution-option" onclick="checkSolution(4, 0)">
+                            A. Cek suhu CPU (overheat), bersihkan kipas dan thermal paste
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(4, 1)">
+                            B. Beli speaker baru
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(4, 2)">
+                            C. Ganti wallpaper desktop
+                        </div>
+                        <div class="solution-option" onclick="checkSolution(4, 3)">
+                            D. Tambah lebih banyak shortcut di desktop
+                        </div>
+                    </div>
+                    <div class="feedback" id="feedback-4"></div>
+                </div>
+            </div>
+
+            <div class="score-display" style="margin-top: 2rem;">
+                Troubleshooting Score: <span id="troubleScore">0</span> / 5
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Glossary -->
+    <section class="section" id="glossary">
+        <div class="container">
+            <h2 class="section-title">📖 Glossary - Kamus Istilah</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Klik untuk melihat definisi!</p>
+            
+            <div class="glossary">
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">CPU (Central Processing Unit)</div>
+                    <div class="glossary-definition">
+                        Otak dari komputer yang bertanggung jawab untuk memproses semua instruksi dari program. Semakin cepat CPU, semakin cepat komputer memproses data.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">RAM (Random Access Memory)</div>
+                    <div class="glossary-definition">
+                        Memori sementara yang digunakan untuk menyimpan data aplikasi yang sedang berjalan. Ketika komputer dimatikan, data di RAM akan hilang.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">HDD (Hard Disk Drive)</div>
+                    <div class="glossary-definition">
+                        Perangkat penyimpanan data permanen yang menggunakan piringan magnetik. Lebih lambat dari SSD tapi kapasitasnya besar dengan harga lebih murah.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">SSD (Solid State Drive)</div>
+                    <div class="glossary-definition">
+                        Perangkat penyimpanan modern yang menggunakan chip flash memory. Lebih cepat, tahan goncangan, dan hemat daya dibanding HDD.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">GPU (Graphics Processing Unit)</div>
+                    <div class="glossary-definition">
+                        Prosesor khusus untuk mengolah grafik dan visual. Penting untuk gaming, editing video, dan rendering 3D.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Motherboard</div>
+                    <div class="glossary-definition">
+                        Papan sirkuit utama yang menghubungkan semua komponen hardware. Semua perangkat terhubung ke motherboard.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">BIOS (Basic Input Output System)</div>
+                    <div class="glossary-definition">
+                        Program yang tersimpan di motherboard untuk menginisialisasi hardware saat komputer dinyalakan sebelum loading sistem operasi.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Operating System (Sistem Operasi)</div>
+                    <div class="glossary-definition">
+                        Software utama yang mengelola hardware dan menjalankan aplikasi. Contoh: Windows, macOS, Linux, Android, iOS.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Input Device</div>
+                    <div class="glossary-definition">
+                        Perangkat yang digunakan untuk memasukkan data ke komputer. Contoh: keyboard, mouse, scanner, microphone, webcam.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Output Device</div>
+                    <div class="glossary-definition">
+                        Perangkat yang menampilkan atau menghasilkan output dari komputer. Contoh: monitor, printer, speaker, proyektor.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Bandwidth</div>
+                    <div class="glossary-definition">
+                        Kapasitas maksimal transfer data dalam jaringan. Semakin besar bandwidth, semakin cepat transfer data.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Driver</div>
+                    <div class="glossary-definition">
+                        Software yang memungkinkan sistem operasi berkomunikasi dengan hardware. Setiap hardware membutuhkan driver yang sesuai.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Firmware</div>
+                    <div class="glossary-definition">
+                        Software permanen yang tertanam di hardware. Contoh: BIOS di motherboard, software di printer.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Cache</div>
+                    <div class="glossary-definition">
+                        Memori sangat cepat yang menyimpan data yang sering diakses untuk mempercepat proses. Ada di CPU, browser, dll.
+                    </div>
+                </div>
+
+                <div class="glossary-item" onclick="toggleGlossary(this)">
+                    <div class="glossary-term">Port</div>
+                    <div class="glossary-definition">
+                        Konektor fisik untuk menghubungkan perangkat eksternal. Contoh: USB port, HDMI port, audio jack.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <h2 id="modalTitle">🎉 Selamat!</h2>
+            <p id="modalMessage"></p>
+            <button class="btn btn-success" onclick="closeModal()">OK</button>
+        </div>
     </div>
-  </nav>
+    <script>
+        // ==================== THEME TOGGLE ====================
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>🖥️ Sistem Komputer</h1>
-      <p>
-        Memahami Brainware, Hardware, dan Software sebagai tiga pilar utama
-        sistem komputer beserta komponen pendukungnya.
-      </p>
-      <a href="#intro" class="cta-button">Mulai Belajar</a>
-    </div>
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
 
-    <!-- Contoh area gambar hero (ganti src dengan gambar Anda) -->
-    <div class="hero-image">
-      <img src="img/sistem-komputer-hero.png" alt="Ilustrasi sistem komputer" />
-    </div>
-  </section>
+        // ==================== SCROLL PROGRESS BAR ====================
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
 
-  <!-- Main Content -->
-  <div class="container main-container">
+        // ==================== SMOOTH SCROLL NAVIGATION ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navbarMenu').classList.remove('active');
+                }
+            });
+        });
 
-    <!-- PENGANTAR -->
-    <section id="intro" class="reveal">
-      <h2>📚 Pengantar Sistem Komputer</h2>
-      <p>
-        Sistem komputer adalah gabungan terintegrasi dari
-        <span class="tooltip">hardware
-          <span class="tooltiptext">
-            Perangkat fisik komputer yang dapat dilihat dan disentuh
-          </span>
-        </span>,
-        <span class="tooltip">software
-          <span class="tooltiptext">
-            Program dan instruksi yang mengatur kerja hardware
-          </span>
-        </span>,
-        dan
-        <span class="tooltip">brainware
-          <span class="tooltiptext">
-            Manusia yang mengoperasikan, mengendalikan, dan mengembangkan sistem
-          </span>
-        </span>.
-      </p>
-      <p>
-        Ketiga komponen ini saling bergantung: hardware menjadi media fisik,
-        software berperan sebagai pengatur dan penerjemah instruksi, sementara
-        brainware menjadi pengendali utama yang menentukan tujuan dan cara
-        pemanfaatan teknologi komputer.
-      </p>
+        // ==================== MOBILE MENU TOGGLE ====================
+        function toggleMenu() {
+            document.getElementById('navbarMenu').classList.toggle('active');
+        }
 
-      <div class="cards-grid">
-        <div class="card">
-          <span class="card-icon">👨‍💻</span>
-          <h4>Brainware</h4>
-          <p>
-            Manusia sebagai pengguna, perencana, pengembang, dan pemelihara
-            sistem komputer.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🔧</span>
-          <h4>Hardware</h4>
-          <p>
-            Perangkat fisik seperti CPU, RAM, perangkat input/output, dan
-            media penyimpanan.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">💾</span>
-          <h4>Software</h4>
-          <p>
-            Sistem operasi, aplikasi, dan utilitas yang menginstruksikan
-            hardware untuk bekerja.
-          </p>
-        </div>
-      </div>
-    </section>
+        // ==================== TAB SWITCHING ====================
+        function switchTab(index) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            document.getElementById(`tab-${index}`).classList.add('active');
+        }
 
-    <!-- TIGA PILAR -->
-    <section id="pilar" class="reveal">
-      <h2>🏛️ Tiga Pilar Sistem Komputer</h2>
-      <p>
-        Berikut adalah tiga komponen utama yang Anda temukan pada hampir
-        semua pembahasan sistem komputer : brainware, hardware,
-        dan software.
-      </p>
+        // ==================== DRAG & DROP GAME ====================
+        let draggedElement = null;
+        let dragDropScore = 0;
+        const totalDragItems = 13;
 
-      <div class="tabs">
-        <button class="tab-button active" data-tab="brainwareTab">👨‍💻 Brainware</button>
-        <button class="tab-button" data-tab="hardwareTab">🔧 Hardware</button>
-        <button class="tab-button" data-tab="softwareTab">💾 Software</button>
-      </div>
+        function initDragDrop() {
+            const draggables = document.querySelectorAll('.draggable-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
 
-      <!-- Brainware Tab -->
-      <div id="brainwareTab" class="tab-content active">
-        <h3>Brainware: Manusia dalam Sistem Komputer</h3>
-        <p>
-          Brainware adalah semua orang yang terlibat dalam pemanfaatan
-          sistem komputer, mulai dari pengguna biasa hingga perancang
-          dan pemelihara sistem. Dijelaskan bahwa tanpa
-          brainware, hardware dan software tidak akan memberikan manfaat.
-        </p>
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', handleDragStart);
+                draggable.addEventListener('dragend', handleDragEnd);
+            });
 
-        <div class="cards-grid">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="big-emoji">👨‍💼</span>
-                <h4>Operator</h4>
-                <p>Mengoperasikan aplikasi sehari-hari.</p>
-              </div>
-              <div class="flip-card-back">
-                <h4>Operator</h4>
-                <p>
-                  Menjalankan program/aplikasi untuk mengolah data, membuat
-                  dokumen, mengakses informasi, dan melakukan pekerjaan rutin.
-                </p>
-              </div>
-            </div>
-          </div>
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+        }
 
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="big-emoji">👨‍💻</span>
-                <h4>Programmer</h4>
-                <p>Membuat dan mengembangkan software.</p>
-              </div>
-              <div class="flip-card-back">
-                <h4>Programmer / Developer</h4>
-                <p>
-                  Merancang logika, menulis kode, dan menguji software sesuai
-                  kebutuhan pengguna atau organisasi.
-                </p>
-              </div>
-            </div>
-          </div>
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
 
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="big-emoji">🛠️</span>
-                <h4>Teknisi</h4>
-                <p>Memelihara dan memperbaiki sistem.</p>
-              </div>
-              <div class="flip-card-back">
-                <h4>Teknisi / Administrator</h4>
-                <p>
-                  Memastikan perangkat keras dan jaringan berjalan dengan baik,
-                  melakukan perbaikan dan perawatan berkala.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
 
-      <!-- Hardware Tab -->
-      <div id="hardwareTab" class="tab-content">
-        <h3>Hardware: Perangkat Fisik Komputer</h3>
-        <p>
-          Hardware mencakup semua bagian fisik komputer :
-          CPU, motherboard, RAM, media penyimpanan, serta perangkat input dan
-          output.
-        </p>
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            this.classList.add('drag-over');
+            return false;
+        }
 
-        <div class="accordion">
-          <div class="accordion-item">
-            <div class="accordion-header">
-              <span>🧠 CPU (Central Processing Unit)</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                <p>
-                  CPU adalah otak komputer yang bertanggung jawab memproses
-                  instruksi dan data. Bagian CPU terdiri
-                  dari Control Unit, ALU, dan register.
-                </p>
-                <!-- Tempat gambar CPU -->
-                <img src="img/cpu.png" alt="Gambar CPU" class="content-image" />
-                <button class="small-button" data-modal="cpuModal">
-                  Lihat Detail CPU
-                </button>
-              </div>
-            </div>
-          </div>
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
 
-          <div class="accordion-item">
-            <div class="accordion-header">
-              <span>🎛️ Motherboard</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                <p>
-                  Motherboard adalah papan sirkuit utama yang menghubungkan
-                  CPU, memori, penyimpanan, dan perangkat lainnya sehingga
-                  dapat saling berkomunikasi.
-                </p>
-                <img src="img/motherboard.png" alt="Gambar motherboard" class="content-image" />
-              </div>
-            </div>
-          </div>
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            this.classList.remove('drag-over');
+            
+            const itemCategory = draggedElement.getAttribute('data-category');
+            const zoneCategory = this.getAttribute('data-category');
+            
+            if (itemCategory === zoneCategory) {
+                this.appendChild(draggedElement);
+                this.classList.add('correct');
+                dragDropScore++;
+                document.getElementById('dragDropScore').textContent = dragDropScore;
+                
+                if (dragDropScore === totalDragItems) {
+                    setTimeout(() => {
+                        showModal('Selamat! 🎉', 'Kamu berhasil mencocokkan semua komponen dengan benar!');
+                    }, 500);
+                }
+            } else {
+                this.classList.add('incorrect');
+                setTimeout(() => {
+                    this.classList.remove('incorrect');
+                }, 1000);
+            }
+            
+            return false;
+        }
 
-          <div class="accordion-item">
-            <div class="accordion-header">
-              <span>🧩 RAM (Random Access Memory)</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                <p>
-                  RAM adalah memori utama yang bersifat sementara (volatile).
-                  Menyimpan data dan instruksi yang sedang diproses CPU.
-                  Ketika komputer dimatikan, isi RAM akan hilang.
-                </p>
-                <img src="img/ram.png" alt="Gambar RAM" class="content-image" />
-              </div>
-            </div>
-          </div>
+        function resetDragDrop() {
+            dragDropScore = 0;
+            document.getElementById('dragDropScore').textContent = '0';
+            
+            const draggables = document.querySelectorAll('.draggable-item');
+            const container = document.getElementById('draggableItems');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dropZones.forEach(zone => {
+                zone.classList.remove('correct', 'incorrect');
+            });
+            
+            draggables.forEach(item => {
+                container.appendChild(item);
+            });
+        }
 
-          <div class="accordion-item">
-            <div class="accordion-header">
-              <span>💽 Media Penyimpanan</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                <p>
-                  Media penyimpanan digunakan untuk menyimpan data dan program
-                  secara jangka panjang. Terbagi menjadi 2 media penyimpanan:
-                  primary storage dan secondary storage.
-                </p>
-                <ul class="content-list">
-                  <li>Primary: RAM, ROM</li>
-                  <li>Secondary: HDD, SSD, USB flash drive, dll.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        // ==================== QUIZ GAME ====================
+        const quizData = [
+            {
+                question: "Apa fungsi utama CPU dalam sistem komputer?",
+                options: ["Menyimpan data", "Memproses data dan instruksi", "Menampilkan gambar", "Menginput data"],
+                correct: 1
+            },
+            {
+                question: "Perangkat berikut yang termasuk unit input adalah...",
+                options: ["Monitor", "Printer", "Keyboard", "Speaker"],
+                correct: 2
+            },
+            {
+                question: "RAM adalah singkatan dari...",
+                options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Real Access Memory"],
+                correct: 0
+            },
+            {
+                question: "Perangkat penyimpanan data yang paling cepat adalah...",
+                options: ["HDD", "SSD", "Flashdisk", "CD-ROM"],
+                correct: 1
+            },
+            {
+                question: "Software yang mengatur dan mengelola hardware komputer disebut...",
+                options: ["Aplikasi", "Sistem Operasi", "Driver", "Firmware"],
+                correct: 1
+            },
+            {
+                question: "Perangkat berikut yang termasuk output device adalah...",
+                options: ["Mouse", "Scanner", "Printer", "Keyboard"],
+                correct: 2
+            },
+            {
+                question: "GPU berfungsi untuk...",
+                options: ["Menyimpan data", "Memproses grafik dan visual", "Mendinginkan sistem", "Mengatur jaringan"],
+                correct: 1
+            },
+            {
+                question: "Motherboard adalah...",
+                options: ["Perangkat input", "Papan sirkuit utama yang menghubungkan semua komponen", "Software sistem", "Perangkat pendingin"],
+                correct: 1
+            },
+            {
+                question: "Yang bukan termasuk komponen sistem komputer adalah...",
+                options: ["Hardware", "Software", "Brainware", "Courseware"],
+                correct: 3
+            },
+            {
+                question: "Router termasuk dalam kategori unit...",
+                options: ["Unit Pemrosesan", "Unit Input", "Unit Output", "Unit Jaringan"],
+                correct: 3
+            }
+        ];
 
-      <!-- Software Tab -->
-      <div id="softwareTab" class="tab-content">
-        <h3>Software: Program dan Aplikasinya</h3>
-        <p>
-          Software adalah kumpulan program dan instruksi yang mengendalikan
-          kerja hardware. Software dibagi menjadi sistem operasi,
-          software aplikasi, dan software utilitas.
-        </p>
+        let currentQuiz = 0;
+        let quizScore = 0;
+        let userAnswers = [];
 
-        <div class="cards-grid">
-          <div class="card">
-            <span class="card-icon">🖥️</span>
-            <h4>Sistem Operasi</h4>
-            <p>
-              Mengelola sumber daya hardware dan menyediakan antarmuka bagi
-              pengguna: Windows, Linux, macOS, Android, iOS.
-            </p>
-          </div>
+        function initQuiz() {
+            currentQuiz = 0;
+            quizScore = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            showQuestion();
+            document.getElementById('quizResult').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+        }
 
-          <div class="card">
-            <span class="card-icon">📱</span>
-            <h4>Software Aplikasi</h4>
-            <p>
-              Digunakan untuk tugas tertentu: pengolah kata, pengolah angka,
-              desain grafis, browser, aplikasi komunikasi, dan lain-lain.
-            </p>
-          </div>
+        function showQuestion() {
+            const quiz = quizData[currentQuiz];
+            document.getElementById('quizProgress').textContent = `Soal ${currentQuiz + 1} dari ${quizData.length}`;
+            document.getElementById('quizQuestion').textContent = quiz.question;
+            
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            quiz.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option';
+                if (userAnswers[currentQuiz] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').style.display = currentQuiz === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').textContent = currentQuiz === quizData.length - 1 ? 'Lihat Hasil 🎯' : 'Selanjutnya ➡️';
+        }
 
-          <div class="card">
-            <span class="card-icon">🛡️</span>
-            <h4>Software Utilitas</h4>
-            <p>
-              Membantu pemeliharaan dan keamanan sistem, seperti antivirus,
-              program backup, dan pembersih file.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+        function selectAnswer(index) {
+            userAnswers[currentQuiz] = index;
+            
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) {
+                    opt.classList.add('selected');
+                }
+            });
+        }
 
-    <!-- CPU & KOMPONEN UTAMA -->
-    <section id="cpu" class="reveal">
-      <h2>🧠 CPU dan Komponen Utama</h2>
-      <p>
-        CPU dijelaskan sebagai pusat pemrosesan yang
-        memiliki tiga bagian utama: Control Unit, ALU, dan Register.
-      </p>
+        function nextQuestion() {
+            if (currentQuiz < quizData.length - 1) {
+                currentQuiz++;
+                showQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
 
-      <div class="cards-grid">
-        <div class="card">
-          <span class="card-icon">⚙️</span>
-          <h4>Control Unit (CU)</h4>
-          <p>
-            Mengatur alur instruksi dan mengontrol kerja bagian lain di dalam
-            komputer dengan cara mengirimkan sinyal kendali.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">➗</span>
-          <h4>Arithmetic Logic Unit (ALU)</h4>
-          <p>
-            Melakukan operasi aritmatika (penjumlahan, pengurangan, dsb.)
-            dan logika (AND, OR, NOT, dan perbandingan).
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">📥</span>
-          <h4>Register</h4>
-          <p>
-            Tempat penyimpanan kecil berkecepatan tinggi di dalam CPU yang
-            menampung data/instruksi sementara saat pemrosesan berlangsung.
-          </p>
-        </div>
-      </div>
-    </section>
+        function prevQuestion() {
+            if (currentQuiz > 0) {
+                currentQuiz--;
+                showQuestion();
+            }
+        }
 
-    <!-- PERANGKAT INPUT/OUTPUT & STORAGE  -->
-    <section id="devices" class="reveal">
-      <h2>⌨️🖨️ Perangkat Input, Output, dan Penyimpanan</h2>
+        function showQuizResult() {
+            quizScore = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    quizScore++;
+                }
+            });
+            
+            const percentage = (quizScore / quizData.length) * 100;
+            
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('quizResult').style.display = 'block';
+            document.getElementById('finalQuizScore').textContent = `Score: ${quizScore} / ${quizData.length} (${percentage.toFixed(0)}%)`;
+            
+            let message = '';
+            if (percentage === 100) {
+                message = '🌟 Sempurna! Kamu master sistem komputer!';
+            } else if (percentage >= 80) {
+                message = '🎉 Hebat! Pemahaman kamu sangat baik!';
+            } else if (percentage >= 60) {
+                message = '👍 Bagus! Terus tingkatkan!';
+            } else {
+                message = '💪 Jangan menyerah! Coba lagi dan pelajari materinya!';
+            }
+            
+            document.getElementById('quizMessage').textContent = message;
+        }
 
-      <div class="cards-grid">
-        <div class="card">
-          <span class="card-icon">⌨️</span>
-          <h4>Perangkat Input</h4>
-          <p>
-            Digunakan untuk memasukkan data dan perintah ke dalam komputer.
-          </p>
-          <ul class="content-list">
-            <li>Keyboard</li>
-            <li>Mouse</li>
-            <li>Scanner</li>
-            <li>Webcam</li>
-            <li>Microphone</li>
-          </ul>
-        </div>
+        function resetQuiz() {
+            initQuiz();
+        }
 
-        <div class="card">
-          <span class="card-icon">🖥️</span>
-          <h4>Perangkat Output</h4>
-          <p>
-            Menampilkan hasil pemrosesan komputer kepada pengguna.
-          </p>
-          <ul class="content-list">
-            <li>Monitor</li>
-            <li>Printer</li>
-            <li>Speaker</li>
-            <li>Projector</li>
-            <li>Headphone</li>
-          </ul>
-        </div>
+        // ==================== MEMORY CARD GAME ====================
+        const memoryIcons = ['💻', '🖥️', '⌨️', '🖱️', '🖨️', '📱'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let gameTimer = 0;
+        let timerInterval = null;
 
-        <div class="card">
-          <span class="card-icon">💾</span>
-          <h4>Penyimpanan Data</h4>
-          <p>Tempat menyimpan data dan program.</p>
-          <ul class="content-list">
-            <li>Primary Storage: RAM, ROM</li>
-            <li>Secondary Storage: HDD, SSD, USB flash drive</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        function initMemoryGame() {
+            memoryCards = [...memoryIcons, ...memoryIcons];
+            shuffleArray(memoryCards);
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            gameTimer = 0;
+            
+            document.getElementById('moveCount').textContent = '0';
+            document.getElementById('matchCount').textContent = '0';
+            document.getElementById('timeCount').textContent = '0';
+            
+            createMemoryBoard();
+            startTimer();
+        }
 
-    <!-- SOFTWARE (bab khusus) -->
-    <section id="software" class="reveal">
-      <h2>💽 Software: Program dan Aplikasinya</h2>
-      <p>
-        Bagian ini mengulang dan menegaskan bab software , dengan
-        pembagian jenis software dan contoh-contohnya.
-      </p>
-      <div class="cards-grid">
-        <div class="card">
-          <span class="card-icon">⚙️</span>
-          <h4>Sistem Operasi</h4>
-          <p>
-            Mengelola sumber daya sistem dan menjadi perantara antara pengguna
-            dengan hardware.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">📊</span>
-          <h4>Software Aplikasi</h4>
-          <p>
-            Mendukung pekerjaan spesifik, misalnya pengolah kata, pengolah
-            angka, desain grafis, dan lain-lain.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🧹</span>
-          <h4>Utilitas</h4>
-          <p>
-            Menjaga kinerja dan keamanan: antivirus, disk cleaner, program
-            backup, dan sebagainya.
-          </p>
-        </div>
-      </div>
-    </section>
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
 
-    <!-- DIAGRAM EKOSISTEM -->
-    <section id="ekosistem" class="reveal">
-      <h2>🔄 Hubungan dan Ekosistem Sistem Komputer</h2>
-      <p>
-        “Brainware, hardware, dan software bekerja bersama membentuk ekosistem, 
-        seperti yang digambarkan dalam diagram berikut yang menunjukkan alur interaksinya.”
-      </p>
+        function createMemoryBoard() {
+            const gameBoard = document.getElementById('memoryGame');
+            gameBoard.innerHTML = '';
+            
+            memoryCards.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = index;
+                card.dataset.icon = icon;
+                card.innerHTML = `
+                    <div class="memory-card-front">❓</div>
+                    <div class="memory-card-back">${icon}</div>
+                `;
+                card.onclick = () => flipMemoryCard(card, index);
+                gameBoard.appendChild(card);
+            });
+        }
 
-      <div class="diagram-container">
-        <svg class="diagram-svg" viewBox="0 0 600 300">
-          <!-- Brainware -->
-          <rect class="diagram-element" id="brainNode"
-                x="50" y="100" rx="20" ry="20"
-                width="140" height="80"
-                fill="#6366f1" />
-          <text x="120" y="145" text-anchor="middle" fill="#fff" font-size="16">
-            Brainware
-          </text>
-          <text x="120" y="165" text-anchor="middle" fill="#e5e7eb" font-size="12">
-            Manusia
-          </text>
+        function flipMemoryCard(card, index) {
+            if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+            
+            card.classList.add('flipped');
+            flippedCards.push({ card, index, icon: card.dataset.icon });
+            
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('moveCount').textContent = moves;
+                checkMemoryMatch();
+            }
+        }
 
-          <!-- Software -->
-          <rect class="diagram-element" id="softNode"
-                x="230" y="40" rx="20" ry="20"
-                width="140" height="80"
-                fill="#8b5cf6" />
-          <text x="300" y="75" text-anchor="middle" fill="#fff" font-size="16">
-            Software
-          </text>
-          <text x="300" y="95" text-anchor="middle" fill="#e5e7eb" font-size="12">
-            Program
-          </text>
+        function checkMemoryMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.icon === card2.icon && card1.index !== card2.index) {
+                // Match found!
+                setTimeout(() => {
+                    card1.card.classList.add('matched');
+                    card2.card.classList.add('matched');
+                    matchedPairs++;
+                    document.getElementById('matchCount').textContent = matchedPairs;
+                    flippedCards = [];
+                    
+                    if (matchedPairs === memoryIcons.length) {
+                        clearInterval(timerInterval);
+                        setTimeout(() => {
+                            showModal('🎉 Selamat!', `Kamu menyelesaikan game dalam ${moves} langkah dan ${gameTimer} detik!`);
+                        }, 500);
+                    }
+                }, 500);
+            } else {
+                // No match
+                setTimeout(() => {
+                    card1.card.classList.remove('flipped');
+                    card2.card.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
 
-          <!-- Hardware -->
-          <rect class="diagram-element" id="hardNode"
-                x="230" y="180" rx="20" ry="20"
-                width="140" height="80"
-                fill="#ec4899" />
-          <text x="300" y="215" text-anchor="middle" fill="#fff" font-size="16">
-            Hardware
-          </text>
-          <text x="300" y="235" text-anchor="middle" fill="#ffe4e6" font-size="12">
-            Perangkat Fisik
-          </text>
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                gameTimer++;
+                document.getElementById('timeCount').textContent = gameTimer;
+            }, 1000);
+        }
 
-          <!-- Output -->
-          <rect class="diagram-element" id="outNode"
-                x="430" y="100" rx="20" ry="20"
-                width="140" height="80"
-                fill="#22c55e" />
-          <text x="500" y="135" text-anchor="middle" fill="#fff" font-size="16">
-            Output
-          </text>
-          <text x="500" y="155" text-anchor="middle" fill="#dcfce7" font-size="12">
-            Informasi
-          </text>
+        function resetMemoryGame() {
+            if (timerInterval) clearInterval(timerInterval);
+            initMemoryGame();
+        }
 
-          <!-- Arrows -->
-          <defs>
-            <marker id="arrow" markerWidth="10" markerHeight="10"
-                    refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L6,3 z" fill="#e5e7eb" />
-            </marker>
-          </defs>
+        // ==================== PC BUILDER ====================
+        function updatePCBuild() {
+            const cpu = document.getElementById('cpuSelect');
+            const ram = document.getElementById('ramSelect');
+            const storage = document.getElementById('storageSelect');
+            const gpu = document.getElementById('gpuSelect');
+            const mobo = document.getElementById('moboSelect');
+            
+            document.getElementById('selectedCPU').textContent = cpu.options[cpu.selectedIndex].text.split(' - ')[0] || '-';
+            document.getElementById('selectedRAM').textContent = ram.options[ram.selectedIndex].text.split(' - ')[0] || '-';
+            document.getElementById('selectedStorage').textContent = storage.options[storage.selectedIndex].text.split(' - ')[0] || '-';
+            document.getElementById('selectedGPU').textContent = gpu.options[gpu.selectedIndex].text.split(' - ')[0] || '-';
+            document.getElementById('selectedMobo').textContent = mobo.options[mobo.selectedIndex].text.split(' - ')[0] || '-';
+            
+            const total = parseInt(cpu.value) + parseInt(ram.value) + parseInt(storage.value) + parseInt(gpu.value) + parseInt(mobo.value);
+            document.getElementById('totalPrice').textContent = total.toLocaleString('id-ID');
+        }
 
-          <line x1="190" y1="140" x2="230" y2="100"
-                stroke="#e5e7eb" stroke-width="2"
-                marker-end="url(#arrow)" />
-          <line x1="300" y1="120" x2="300" y2="180"
-                stroke="#e5e7eb" stroke-width="2"
-                marker-end="url(#arrow)" />
-          <line x1="370" y1="140" x2="430" y2="140"
-                stroke="#e5e7eb" stroke-width="2"
-                marker-end="url(#arrow)" />
-          <line x1="430" y1="180" x2="370" y2="210"
-                stroke="#e5e7eb" stroke-width="2"
-                marker-end="url(#arrow)" />
-        </svg>
-        <p class="diagram-hint">
-          Klik setiap kotak pada diagram untuk melihat ringkasan perannya.
-        </p>
-      </div>
-    </section>
+        function buildPC() {
+            const total = parseInt(document.getElementById('totalPrice').textContent.replace(/\./g, ''));
+            
+            if (total === 0) {
+                showModal('⚠️ Peringatan', 'Pilih semua komponen terlebih dahulu!');
+                return;
+            }
+            
+            const cpu = document.getElementById('cpuSelect').selectedIndex;
+            const ram = document.getElementById('ramSelect').selectedIndex;
+            const storage = document.getElementById('storageSelect').selectedIndex;
+            const gpu = document.getElementById('gpuSelect').selectedIndex;
+            const mobo = document.getElementById('moboSelect').selectedIndex;
+            
+            if (cpu === 0 || ram === 0 || storage === 0 || gpu === 0 || mobo === 0) {
+                showModal('⚠️ Peringatan', 'Pilih semua komponen terlebih dahulu!');
+                return;
+            }
+            
+            showModal('✅ PC Berhasil Dirakit!', `Selamat! PC dengan total budget Rp ${total.toLocaleString('id-ID')} berhasil dirakit! 🎉`);
+        }
 
-    <!-- QUIZ -->
-    <section id="quiz" class="reveal">
-      <h2>📝 Quiz Sistem Komputer</h2>
-      <p>
-        Jawab pertanyaan berikut untuk menguji pemahaman Anda terhadap
-        materi Sistem Komputer.
-      </p>
+        function resetPCBuilder() {
+            document.getElementById('cpuSelect').selectedIndex = 0;
+            document.getElementById('ramSelect').selectedIndex = 0;
+            document.getElementById('storageSelect').selectedIndex = 0;
+            document.getElementById('gpuSelect').selectedIndex = 0;
+            document.getElementById('moboSelect').selectedIndex = 0;
+            updatePCBuild();
+        }
 
-      <div class="quiz-container" id="quizContainer">
-        <!-- Soal akan di-generate lewat JavaScript -->
-      </div>
-    </section>
+        // ==================== TROUBLESHOOTING ====================
+        const troubleAnswers = [0, 1, 0, 1, 0]; // Correct answers for each case
+        const troubleExplanations = [
+            "✅ Benar! Masalah power adalah hal pertama yang harus dicek jika komputer tidak menyala sama sekali.",
+            "✅ Benar! RAM penuh adalah penyebab utama komputer lambat. Menambah RAM atau menutup aplikasi yang tidak terpakai adalah solusi tepat.",
+            "✅ Benar! Jika komputer menyala tapi monitor blank, kemungkinan besar masalahnya di koneksi kabel video.",
+            "✅ Benar! Mencoba keyboard lain atau mengecek driver adalah langkah troubleshooting yang tepat untuk masalah keyboard.",
+            "✅ Benar! Restart otomatis sering disebabkan oleh overheat. Membersihkan kipas dan mengganti thermal paste adalah solusi yang tepat."
+        ];
+        let troubleScore = 0;
+        let answeredCases = new Array(5).fill(false);
 
-    <!-- KESIMPULAN -->
-    <section id="kesimpulan" class="reveal">
-      <h2>✅ Kesimpulan</h2>
-      <p>
-        Dapat disimpulkan bahwa sistem komputer terdiri dari
-        brainware, hardware, dan software yang saling terhubung. Brainware
-        menentukan tujuan dan cara pemanfaatan teknologi, hardware
-        menyediakan sarana fisik, sedangkan software mengatur dan
-        menerjemahkan instruksi.
-      </p>
-      <p>
-        Pemahaman tentang masing-masing komponen (termasuk CPU, perangkat
-        input/output, dan media penyimpanan) sangat penting agar komputer
-        dapat dimanfaatkan secara optimal dalam belajar, bekerja, dan
-        kehidupan sehari-hari.
-      </p>
-    </section>
+        function checkSolution(caseIndex, answerIndex) {
+            if (answeredCases[caseIndex]) return;
+            
+            const options = document.querySelectorAll(`.case-card:nth-child(${caseIndex + 1}) .solution-option`);
+            const feedback = document.getElementById(`feedback-${caseIndex}`);
+            
+            options.forEach(opt => opt.classList.add('disabled'));
+            answeredCases[caseIndex] = true;
+            
+            if (answerIndex === troubleAnswers[caseIndex]) {
+                options[answerIndex].classList.add('correct');
+                feedback.className = 'feedback correct show';
+                feedback.textContent = troubleExplanations[caseIndex];
+                troubleScore++;
+            } else {
+                options[answerIndex].classList.add('incorrect');
+                options[troubleAnswers[caseIndex]].classList.add('correct');
+                feedback.className = 'feedback incorrect show';
+                feedback.textContent = `❌ Kurang tepat. Jawaban yang benar adalah opsi ${String.fromCharCode(65 + troubleAnswers[caseIndex])}. ${troubleExplanations[caseIndex]}`;
+            }
+            
+            document.getElementById('troubleScore').textContent = troubleScore;
+            
+            if (answeredCases.every(answered => answered)) {
+                setTimeout(() => {
+                    const percentage = (troubleScore / 5) * 100;
+                    let message = '';
+                    if (percentage === 100) {
+                        message = '🌟 Sempurna! Kamu ahli troubleshooting!';
+                    } else if (percentage >= 60) {
+                        message = '👍 Bagus! Kamu punya skill troubleshooting yang baik!';
+                    } else {
+                        message = '💪 Terus belajar! Pengalaman adalah guru terbaik!';
+                    }
+                    showModal('📊 Hasil Troubleshooting', `Score: ${troubleScore}/5\n${message}`);
+                }, 1000);
+            }
+        }
 
-  </div>
-<!-- FOOTER / CREATED BY -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-content">
-      <div class="footer-logo">💻 Sistem Komputer</div>
-      <p class="footer-description">
-        Materi pembelajaran interaktif tentang Brainware, Hardware, dan Software.
-      </p>
-    </div>
-    
-    <div class="footer-links">
-      <h4>Menu</h4>
-      <ul>
-        <li><a href="#intro">Pendahuluan</a></li>
-        <li><a href="#pilar">Tiga Pilar</a></li>
-        <li><a href="#cpu">CPU</a></li>
-        <li><a href="#quiz">Quiz</a></li>
-      </ul>
-    </div>
-    
-    <div class="footer-social">
-      <h4>Ikuti Kami</h4>
-      <div class="social-icons">
-        <a href="#" title="Instagram">📷</a>
-        <a href="#" title="Twitter">🐦</a>
-        <a href="#" title="YouTube">▶️</a>
-        <a href="#" title="GitHub">💻</a>
-      </div>
-    </div>
-  </div>
-  
-  <div class="footer-bottom">
-    <p>
-      &copy; 2025 <strong>Sistem Komputer</strong>. All rights reserved.
-    </p>
-    <p class="created-by">
-      Created with  by <a href="https://yourwebsite.com" target="_blank">Amrin Amrillah</a>
-    </p>
-  </div>
-</footer>
-  <!-- MODAL DETAIL CPU -->
-  <div id="cpuModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Detail CPU </h3>
-      <p>
-        CPU (Central Processing Unit) merupakan pusat pemrosesan data yang
-        memiliki tiga bagian utama:
-      </p>
-      <ul class="content-list">
-        <li>
-          <strong>Control Unit (CU)</strong> – mengatur alur instruksi dan
-          koordinasi kerja seluruh komponen.
-        </li>
-        <li>
-          <strong>Arithmetic Logic Unit (ALU)</strong> – melakukan operasi
-          matematika dan logika.
-        </li>
-        <li>
-          <strong>Register</strong> – menyimpan data dan instruksi sementara
-          dengan akses sangat cepat.
-        </li>
-      </ul>
-      <p>
-        CPU bekerja sangat cepat dalam satuan siklus mesin untuk mengeksekusi
-        instruksi yang disediakan oleh software.
-      </p>
-    </div>
-  </div>
+        // ==================== GLOSSARY ====================
+        function toggleGlossary(element) {
+            element.classList.toggle('active');
+        }
 
-  <script src="script.js"></script>
+        // ==================== MODAL ====================
+        function showModal(title, message) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // ==================== INITIALIZE ALL GAMES ====================
+        window.addEventListener('DOMContentLoaded', () => {
+            initDragDrop();
+            initQuiz();
+            initMemoryGame();
+            updatePCBuild();
+        });
+    </script>
 </body>
 </html>
